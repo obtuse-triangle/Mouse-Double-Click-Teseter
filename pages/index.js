@@ -56,8 +56,8 @@ export default function Home() {
       <button onClick={handleClearLog} className={styles.checkBox}>Reset</button>
       
       <div className={styles.logArea} ref={logRef}>
-        {log.map ((time) => {
-          return <div className={styles.logText}>{time}</div>
+        {log.map ((time, index) => {
+          return <div key={index} className={styles.logText}>{time}</div>
         }
         )}
       </div>
