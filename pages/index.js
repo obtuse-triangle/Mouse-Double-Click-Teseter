@@ -1,8 +1,41 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import React from "react"
 
 export default function Home() {
+  const [count, setCount] = React.useState(0);
+  const [clickTime, setClickTime] = React.useState(0);
+  const [log, setLog] = React.useState([]);
+  const [autoScroll, setAutoScroll] = React.useState(true);
+  const [doubleClickDetected, setDoubleClickDetected] = React.useState(false);
+  const logRef = React.useRef(null);
+
+  function handleClick(e) {
+    e.preventDefault(e);
+    var currentTime = new Date();
+    if(currentTime - clickTime < 100) {
+      setDoubleClickDetected(true);
+    }
+    setLog((currnt)=> [...currnt, ((currentTime - clickTime) / 1000)]);
+    setCount((currt)=>currt+1);
+    setClickTime(currentTime);
+    if(autoScroll){
+      logRef.current.scrollTop = logRef.current.scrollHeight+1;
+    }
+  }
+
+  function handleAutoScrollCheckbox() {
+    setAutoScroll((currnt)=>!currnt);
+    console.log("changed.")
+  }
+
+  function handleClearLog() {
+    setLog([]);
+    setCount(0);
+    setDoubleClickDetected(false);
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -10,59 +43,24 @@ export default function Home() {
         <meta name="description" content="Mouse double click test" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <div className={styles.clickArea} onClick={(e) =>handleClick(e)} onContextMenu={(e) =>handleClick(e)} style={doubleClickDetected ? {backgroundColor : "tomato"} : null}>
+        {doubleClickDetected ? "double click detected!" : "Click here to test mouse!"}
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+      </div>
+      
+      <span className={styles.checkBox}>{count}</span>
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+      <input type="checkbox" name="Auto scroll" className={styles.checkBox} id="scrollCheckbox" defaultChecked onClick={handleAutoScrollCheckbox}/>
+      <label htmlFor="scrollCheckbox" style={{userSelect:"none"}}>Auto scroll</label>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{" "}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+      <button onClick={handleClearLog} className={styles.checkBox}>Reset</button>
+      
+      <div className={styles.logArea} ref={logRef}>
+        {log.map ((time) => {
+          return <div className={styles.logText}>{time}</div>
+        }
+        )}
+      </div>
     </div>
   );
 }
