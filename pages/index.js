@@ -2,6 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
+import useTranslation from "next-translate/useTranslation";
+import Link from 'next/link'
 
 export default function Home() {
   const [count, setCount] = React.useState(0);
@@ -10,6 +12,7 @@ export default function Home() {
   const [autoScroll, setAutoScroll] = React.useState(true);
   const [doubleClickDetected, setDoubleClickDetected] = React.useState(false);
   const logRef = React.useRef(null);
+  let { t, lang } = useTranslation("index");
 
   React.useEffect(() => {
     if (autoScroll) {
@@ -39,11 +42,14 @@ export default function Home() {
     setDoubleClickDetected(false);
   }
 
+
+
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Mouse double click tester</title>
-        <meta name="description" content="Mouse double click test" />
+        <title>{t("title")}</title>
+        <meta name="description" content={t("index:description")} />
       </Head>
 
       <div
@@ -52,9 +58,7 @@ export default function Home() {
         onContextMenu={(e) => handleClick(e)}
         style={doubleClickDetected ? { backgroundColor: "tomato" } : null}
       >
-        {doubleClickDetected
-          ? "double click detected!"
-          : "Click here to test mouse!"}
+        {doubleClickDetected ? t("index:doubleClickDetected") : t("index:Clickhere")}
       </div>
 
       <span className={styles.checkBox}>{count}</span>
@@ -68,7 +72,7 @@ export default function Home() {
         onClick={handleAutoScrollCheckbox}
       />
       <label htmlFor="scrollCheckbox" style={{ userSelect: "none" }}>
-        Auto scroll
+        {t("index:AutoScroll")}
       </label>
 
       <button onClick={handleClearLog} className={styles.checkBox}>
@@ -84,6 +88,7 @@ export default function Home() {
           );
         })}
       </div>
+      <a href={lang == "ko" ? "/en" : "/ko"} style={{marginLeft: "10px"}}>{t("index:Language")}</a>
     </div>
   );
 }
