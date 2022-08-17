@@ -94,7 +94,7 @@ export default function Home() {
         <a href={lang == "ko" ? "/en" : "/ko"}>{t("index:Language")}</a>
       
         <div className="kakaoAdFit" style={{width:"300px", margin:"auto"}}>
-          <ins class="kakao_ad_area" style={{display:"none"}} 
+          <ins className="kakao_ad_area" style={{display:"none"}} 
             data-ad-unit    = "DAN-yAXOS88i3L3sO9C2" 
             data-ad-width   = "300" 
             data-ad-height  = "250">
