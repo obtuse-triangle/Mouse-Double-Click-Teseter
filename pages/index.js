@@ -52,11 +52,11 @@ export default function Home() {
       <Head>
         <title>{t("title")}</title>
         <meta name="description" content={t("index:description")} />
-        <Script
+        <script
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-        ></Script>
-        <Script
+        ></script>
+        <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -64,7 +64,7 @@ export default function Home() {
 
           gtag('config', '${GA_TRACKING_ID}');`,
           }}
-        ></Script>
+        ></script>
       </Head>
 
       <div
