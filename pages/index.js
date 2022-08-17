@@ -1,9 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import React from "react";
 import useTranslation from "next-translate/useTranslation";
-import Link from 'next/link'
+// import Link from 'next/link'
 import Script from "next/script";
 
 export default function Home() {
