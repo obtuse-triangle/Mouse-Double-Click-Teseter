@@ -100,8 +100,8 @@ export default function Home() {
             data-ad-height  = "250">
           </ins> 
         </div>
-        <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></Script>
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5639066827211612"
+        <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" defer></Script>
+        <Script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5639066827211612"
         crossorigin="anonymous"></Script>
         <div>
           <h3>마우스의 더블클릭 현상이란?</h3>
