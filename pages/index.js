@@ -5,6 +5,7 @@ import React from "react";
 import useTranslation from "next-translate/useTranslation";
 // import Link from 'next/link'
 import Script from "next/script";
+import { GA_TRACKING_ID } from "../lib/gtga";
 
 export default function Home() {
   const [count, setCount] = React.useState(0);
@@ -51,6 +52,19 @@ export default function Home() {
       <Head>
         <title>{t("title")}</title>
         <meta name="description" content={t("index:description")} />
+        <Script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        ></Script>
+        <Script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${GA_TRACKING_ID}');`,
+          }}
+        ></Script>
       </Head>
 
       <div
