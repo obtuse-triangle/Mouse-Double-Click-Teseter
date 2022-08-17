@@ -1,6 +1,6 @@
 {
     "title": "마우스 더블클릭 테스터",
-    "description": "마우스 더블클릭 테스터",
+    "description": "마우스의 더블클릭을 테스트 할 수 있습니다.",
     "doubleClickDetected": "더블클릭 감지됨!",
     "Clickhere": "여기를 클릭해 마우스를 테스트하세요!",
     "AutoScroll": "자동 스크롤",
